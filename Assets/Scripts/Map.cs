@@ -20,7 +20,8 @@ public static class Map
         }
     }
 
-    public static void Remove(Vector2Int pos) {
+    public static void Remove(Vector2Int pos)
+    {
         if (StaticMap.TryGetValue(pos, out var entity)) entity.Destroy();
         StaticMap.Remove(pos);
     }
