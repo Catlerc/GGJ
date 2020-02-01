@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using UnityEngine;
@@ -46,13 +47,13 @@ public static class Utils
         return newArray;
     }
 
-    public static void map<TA>(this TA[] array, Action<TA> func)
+    public static void map<TA>(this IEnumerable<TA> array, Action<TA> func)
     {
         foreach (var item in array)
             func(item);
     }
 
-    public static void map<TA>(this TA[] array, Action<TA, int> func)
+    public static void map<TA>(this IEnumerable<TA> array, Action<TA, int> func)
     {
         var i = 0;
         foreach (var item in array)
