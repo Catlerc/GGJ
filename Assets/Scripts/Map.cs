@@ -4,20 +4,40 @@ using UnityEngine;
 public static class Map
 {
     private static readonly Dictionary<Vector2Int, GameObject> StaticMap = new Dictionary<Vector2Int, GameObject>();
+    private static readonly Dictionary<Vector2Int, GameObject> DynamicMap = new Dictionary<Vector2Int, GameObject>();
 
     public static bool Set(Vector2Int pos, Entity entity)
     {
-        if (StaticMap.ContainsKey(pos))
+        if (entity.isStatic)
         {
-            Debug.LogWarning($"Object {entity.name} can't be spawned on static map.");
-            return false;
+            if (StaticMap.ContainsKey(pos))
+            {
+                Debug.LogWarning($"Object {entity.name} can't be spawned on dynamic map.");
+                return false;
+            }
+            else
+            {
+                StaticMap.Add(pos, entity.gameObject);
+                entity.pos = pos;
+                return true;
+            }
         }
         else
         {
-            StaticMap.Add(pos, entity.gameObject);
-            entity.pos = pos;
-            return true;
+            if (DynamicMap.ContainsKey(pos))
+            {
+                Debug.LogWarning($"Object {entity.name} can't be spawned on static map.");
+                return false;
+            }
+            else
+            {
+                DynamicMap.Add(pos, entity.gameObject);
+                entity.pos = pos;
+                return true;
+            }
+            
         }
+        
     }
 
     public static void Remove(Vector2Int pos)

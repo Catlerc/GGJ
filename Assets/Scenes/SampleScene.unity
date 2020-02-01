@@ -121,6 +121,36 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &290549221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 290549222}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &290549222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290549221}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.2068596, y: 8.521958, z: -5.0575056}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +378,11 @@ MonoBehaviour:
   - {fileID: 1034644199375922145, guid: d23855d62009c714581cf4df590df9ac, type: 3}
   - {fileID: 4462125590821569589, guid: cf050e2fc49e8084c9e564ffc27e4a70, type: 3}
   bord: {fileID: 6104329977681039245, guid: 763e14ce4e899e74ebd329b33e9ca534, type: 3}
-  bush: {fileID: 1034644199375922145, guid: d23855d62009c714581cf4df590df9ac, type: 3}
+  scrap:
+  - {fileID: 1149469703558992556, guid: f646c20521a707848bb4c1eb3e3bad7a, type: 3}
+  - {fileID: 2198182071773608968, guid: b71bcbbb389a2fc4f8f7ae36b3530c12, type: 3}
+  - {fileID: 4219506621773106316, guid: c1738ca72a5cb3a4b936b94663a76ac0, type: 3}
+  - {fileID: 8075068291275183524, guid: aed627ec795ef374d9f1a602a55aff66, type: 3}
 --- !u!4 &1022407430
 Transform:
   m_ObjectHideFlags: 0
@@ -376,6 +410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pos: {x: 0, y: 0}
+  isStatic: 1
 --- !u!1001 &1578942567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -565,7 +600,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591068845}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 782fed4d157f7cc418ee836803bbaa2c, type: 3}
   m_Name: 

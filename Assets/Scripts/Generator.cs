@@ -9,6 +9,7 @@ public class Generator : MonoBehaviour
     public GameObject[] prefabs;
     public GameObject[] grassPrefabs;
     public GameObject bord;
+    public GameObject[] scrap;
     private readonly int width = 32;
     private int lineIndex = 0;
 
@@ -57,5 +58,14 @@ public class Generator : MonoBehaviour
     {
         for (int i = 0; i < 30; i++)
             InstantiateLine();
+        SpawnScrap(new Vector2Int(-30,0),new Vector2Int(-5,0));
+    }
+
+    public void SpawnScrap(Vector2Int startPos, Vector2Int endPos)
+    {
+        var entity = scrap.PickRandom().InstantiateToMap(endPos);
+        var anim = entity.gameObject.GetComponent<ScrapFallAnimation>();
+        anim.startPos = new Vector3(startPos.x * 0.8f, 0, startPos.y * 0.8f);
+        anim.endPos = new Vector3(endPos.x * 0.8f, 0, endPos.y * 0.8f);
     }
 }
