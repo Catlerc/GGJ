@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 public static class Utils
 {
@@ -58,6 +60,26 @@ public static class Utils
             func(item, i);
             i++;
         }
+    }
+
+    public static T PickRandom<T>(this T[] array) => array[Random.Range(0, array.Length)];
+
+    public static T PickByNoise<T>(this T[] array, Vector2Int pos)
+    {
+        var maxNoiseValue = 0f;
+        var maxObj = array[0];
+        for (var i = 0; i < array.Length; i++)
+        {
+            var scale = 15f - i * 3;
+            var value = Mathf.PerlinNoise(pos.x / scale + 100 + i, pos.y / scale + 100);
+            if (value > maxNoiseValue)
+            {
+                maxNoiseValue = value;
+                maxObj = array[i];
+            }
+        }
+
+        return maxObj;
     }
 }
 

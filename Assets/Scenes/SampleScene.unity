@@ -207,7 +207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 26.67, z: -4.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -342,8 +342,12 @@ MonoBehaviour:
   prefabs:
   - {fileID: 7331607785841044082, guid: a571337553c5a2b41af692192dd2c90b, type: 3}
   - {fileID: 3533643572825345354, guid: 0c86aaed23c310941bdae3e3b70acbcd, type: 3}
+  - {fileID: 5991153405718960115, guid: 4f284c06e7d73f24eb939d6950d5c5c3, type: 3}
+  grassPrefabs:
+  - {fileID: 4131469707563190567, guid: 5dbf2853e8ab2614d9c5de065ad47215, type: 3}
+  - {fileID: 4462125590821569589, guid: cf050e2fc49e8084c9e564ffc27e4a70, type: 3}
   bord: {fileID: 6104329977681039245, guid: 763e14ce4e899e74ebd329b33e9ca534, type: 3}
-  grass: {fileID: 4462125590821569589, guid: cf050e2fc49e8084c9e564ffc27e4a70, type: 3}
+  bush: {fileID: 1034644199375922145, guid: d23855d62009c714581cf4df590df9ac, type: 3}
 --- !u!4 &1022407430
 Transform:
   m_ObjectHideFlags: 0

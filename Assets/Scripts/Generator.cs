@@ -7,8 +7,9 @@ public class Generator : MonoBehaviour
 {
     [NonSerialized] public static float SizeOfTileSide = 8 / 10f;
     public GameObject[] prefabs;
+    public GameObject[] grassPrefabs;
     public GameObject bord;
-    public GameObject grass;
+    public GameObject bush;
     private readonly int width = 32;
     private int lineIndex = 0;
 
@@ -27,24 +28,30 @@ public class Generator : MonoBehaviour
 
     public void InstantiateLine()
     {
-        for (var x = 0; x <= width / 2+2; x++)
+        for (var x = 0; x <= width / 2 + 5; x++)
         {
             Repeat.Func(c =>
                 {
                     c = c == 0 ? 1 : -1;
-                    print(c);
                     switch (x)
                     {
                         case int n when n < width / 2:
                             var pos = new Vector2Int(c * x, lineIndex);
-                            prefabs[isBroken(pos) ? 0 : 1]
-                                .InstantiateToMap(pos, 90 * Random.Range(0, 4));
+                            prefabs.PickByNoise(pos).InstantiateToMap(pos, 90 * Random.Range(0, 4));
+                                
                             break;
                         case int n when n == width / 2:
                             bord.InstantiateToMap(new Vector2Int(x * c, lineIndex), 90 * c);
                             break;
+                        case int n when n <= width / 2 + 2:
+                            if (Random.Range(0, 2) == 0)
+                                grassPrefabs.PickRandom().InstantiateToMap(new Vector2Int(x * c, lineIndex),
+                                    90 * Random.Range(0, 4));
+                            else
+                                bush.InstantiateToMap(new Vector2Int(x * c, lineIndex), 90 * Random.Range(0, 4));
+                            break;
                         default:
-                            grass.InstantiateToMap(new Vector2Int(x*c, lineIndex), 90 * Random.Range(0, 4));
+                            grassPrefabs.PickRandom().InstantiateToMap(new Vector2Int(x * c, lineIndex), 90 * Random.Range(0, 4));
                             break;
                     }
                 }, x == 0 ? 1 : 2);
@@ -62,7 +69,7 @@ public class Generator : MonoBehaviour
 
     public void Start()
     {
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 200; i++)
             InstantiateLine();
     }
 }
