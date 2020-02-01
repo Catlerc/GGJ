@@ -8,11 +8,10 @@ public class Car : MonoBehaviour
     public float forwardSpeed;
     public GameObject cameraObj;
     public float cameraOffsetZ;
-    public bool engine;
+    public bool engine = true;
 
     void Start()
     {
-        engine = false;
     }
 
     void Update()
@@ -27,7 +26,10 @@ public class Car : MonoBehaviour
 
     void Move()
     {
-        transform.Rotate(0, Input.GetAxis("Horizontal") * Time.deltaTime * rotateSpeed, 0);
+        var newAngle = Input.GetAxis("Horizontal") * Time.deltaTime * rotateSpeed + transform.rotation.eulerAngles.y;
+        if (!(newAngle > 90 && newAngle < 270))
+            transform.rotation = Quaternion.Euler(new Vector3(0, newAngle, 0));
+        //transform.Rotate(0, Input.GetAxis("Horizontal") * Time.deltaTime * rotateSpeed, 0);
         transform.Translate(Vector3.forward * Time.deltaTime * forwardSpeed);
     }
 
