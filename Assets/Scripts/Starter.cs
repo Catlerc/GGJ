@@ -22,13 +22,42 @@ public class Starter : MonoBehaviour
     {
         cameraWorkPos = cameraObj.transform.position;
         cameraWorkRotate = cameraObj.transform.rotation.eulerAngles;
-        
-        ratingDictionary = new Dictionary<string, int>();
+
+        ratingDictionary = getAllRating();
 
         goStartPos();
-        
+
         canvasStatsObj.SetActive(false);
     }
+
+    private Dictionary<string, int> getAllRating()
+    {
+        var dict = new Dictionary<string, int>();
+        var userIndex = 0;
+        while (PlayerPrefs.HasKey($"user{userIndex}Score"))
+        {
+            dict.Add(PlayerPrefs.GetString($"user{userIndex}Name"), PlayerPrefs.GetInt($"user{userIndex}Score"));
+            userIndex++;
+        }
+
+        return dict;
+    }
+
+    private void saveAllRating(Dictionary<string, int> dict)
+    {
+        var userIndex = 0;
+        foreach (var pair in dict)
+        {
+            var userName = pair.Key;
+            var userScore = pair.Value;
+            PlayerPrefs.SetString($"user{userIndex}Name", userName);
+            PlayerPrefs.SetInt($"user{userIndex}Score", userScore);
+            userIndex++;
+        }
+
+        PlayerPrefs.Save();
+    }
+
 
     void Update()
     {
@@ -43,14 +72,14 @@ public class Starter : MonoBehaviour
     {
         canvasStartObj.SetActive(false);
         canvasStatsObj.SetActive(false);
-        
+
         nickname = inputNickname.text;
 
         if (nickname == "")
         {
             nickname = "No Name";
         }
-        
+
         goWorkPos();
         carInstance.engine = true;
     }
@@ -72,7 +101,7 @@ public class Starter : MonoBehaviour
         cameraObj.transform.position = cameraStartPos;
         cameraObj.transform.rotation = Quaternion.Euler(cameraStartRotate);
     }
-    
+
     void AddRating()
     {
         if (ratingDictionary.ContainsKey(nickname))
@@ -84,19 +113,19 @@ public class Starter : MonoBehaviour
         }
         else
             ratingDictionary.Add(nickname, carInstance.score);
-        
+        saveAllRating(ratingDictionary);
         ViewRating();
     }
 
     void ViewRating()
     {
         canvasStatsObj.SetActive(true);
-        
+
         textRating.text = "";
-        
-        foreach (var item in ratingDictionary.OrderBy(i => i.Value))
+
+        foreach (var item in ratingDictionary.OrderBy(i => -i.Value))
         {
-            textRating.text += item.Key + " - " + item.Value + "\n";
+            textRating.text += item.Key + ": " + item.Value + "\n";
         }
     }
 }
