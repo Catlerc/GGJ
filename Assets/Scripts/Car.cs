@@ -14,7 +14,18 @@ public class Car : MonoBehaviour
     public float cameraSpeed;
     public float cameraMaxOffset;
     public bool engine;
-    public int score;
+    private int _score = 0;
+
+    public int score
+    {
+        set
+        {
+            _score = value;
+            text.text = $"Очки: {value}";
+        }
+        get => _score;
+    }
+
     public int _hp = 4;
     public GameObject repairedPrefab;
     public GameObject infoIconPrefab;
@@ -26,6 +37,7 @@ public class Car : MonoBehaviour
     public GameObject HPImage1;
     public GameObject HPImage2;
     public GameObject HPImage3;
+    public Text text;
 
     public int hp
     {
@@ -36,7 +48,6 @@ public class Car : MonoBehaviour
                 _hp = value;
                 switch (value)
                 {
-                    
                     case 2:
                         Destroy(HPImage3);
                         break;
@@ -46,11 +57,10 @@ public class Car : MonoBehaviour
                     case 0:
                         starter.EndGame();
                         break;
-                    
                 }
-                Respawn();    
+
+                Respawn();
             }
-            
         }
         get => _hp;
     }
@@ -60,7 +70,6 @@ public class Car : MonoBehaviour
     void Start()
     {
         _renderer = GetComponent<Renderer>();
-        score = 0;
     }
 
     void Update()
@@ -71,8 +80,8 @@ public class Car : MonoBehaviour
             CheckRoad();
             MoveCamera();
             time += Time.deltaTime;
-            progressbar.sizeDelta=new Vector2(778.45f - 778.45f * time / maxTime,63.39999f);
-            
+            progressbar.sizeDelta = new Vector2(778.45f - 778.45f * time / maxTime, 63.39999f);
+            if (time > maxTime) starter.EndGame();
         }
 
         if (!GetComponent<Renderer>().isVisible)
@@ -84,11 +93,51 @@ public class Car : MonoBehaviour
         repairPoint.map(obj => repair(obj.transform.position));
     }
 
-    public void Respawn()
+    public void Respawn() // Будем считать что эта хрень  работает
     {
         var pos = transform.position;
-        transform.position = new Vector3(0, pos.y, cameraObj.transform.position.z);
+        bool spawned = false;
         transform.rotation = Quaternion.identity;
+        var g = Mathf.FloorToInt(cameraObj.transform.position.z / 0.8f+5);
+        for (var i = 0; i < 13 - 4; i++)
+        {
+            bool canSpawn = true;
+            for (int j = -2; j < 4; j++)
+            for (int j2 = 0; j < 14; j++)
+                if (Map.Get(new Vector2Int(i + j, g + j2)).CompareTag("dead"))
+                {
+                    canSpawn = false;
+                    break;
+                }
+
+            if (canSpawn)
+            {
+                transform.position = new Vector3((i+1) * 0.8f, pos.y, cameraObj.transform.position.z);
+                spawned = true;
+                break;
+            }
+        }
+
+        if (!spawned)//https://s.fishki.net/upload/users/2019/12/30/482/696a27c4296dfcdbea055c8c17e702ae.jpg
+            for (var i = -13; i < 0; i++)
+            {
+                bool canSpawn = true;
+                for (int j = -2; j <= 4; j++)
+                for (int j2 = 0; j < 14; j++)
+
+                    if (Map.Get(new Vector2Int(i + j, g + j2)).CompareTag("dead"))
+                    {
+                        canSpawn = false;
+                        break;
+                    }
+
+                if (canSpawn)
+                {
+                    transform.position = new Vector3((i+1) * 0.8f, pos.y, cameraObj.transform.position.z);
+                    spawned = true;
+                    break;
+                }
+            }
     }
 
     void EndGame()
@@ -146,6 +195,7 @@ public class Car : MonoBehaviour
                 Map.RemoveStatic(pos);
                 var newEntity = Instantiate(repairedPrefab, realpos, Quaternion.identity).GetComponent<Entity>();
                 Map.Set(pos, newEntity);
+                score += entity.toScore;
             }
 
             if (hit.collider.CompareTag("scrap"))
@@ -155,6 +205,7 @@ public class Car : MonoBehaviour
                 var pos = entity.pos;
                 Map.RemoveDynamic(pos);
                 Instantiate(infoIconPrefab, transform.position, Quaternion.identity);
+                score -= 500;
             }
         }
 
