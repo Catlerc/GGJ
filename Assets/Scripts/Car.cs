@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,10 +11,12 @@ public class Car : MonoBehaviour
     public float cameraSpeed;
     public float cameraMaxOffset;
     public bool engine;
+    public int score;
 
     void Start()
     {
         engine = false;
+        score = 0;
     }
 
     void Update()
@@ -24,6 +27,12 @@ public class Car : MonoBehaviour
             CheckRoad();
             MoveCamera();
         }
+    }
+
+    void EndGame()
+    {
+        engine = false;
+        GetComponent<Starter>().EndGame();
     }
 
     void Move()
@@ -45,7 +54,7 @@ public class Car : MonoBehaviour
             {
                 print("Hit");
                 print(hit.collider);
-                engine = false;
+                EndGame();
             }
         }
     }
@@ -66,6 +75,7 @@ public class Car : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        engine = false;
+        EndGame();
     }
+
 }
