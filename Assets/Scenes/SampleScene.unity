@@ -1849,7 +1849,9 @@ MonoBehaviour:
   cameraSpeed: 0
   cameraMaxOffset: -9
   engine: 0
-  _hp: 4
+  smogPrefab: {fileID: 3862330100635130989, guid: 3d96a596127ed9244bcfa879b4fb27b6,
+    type: 3}
+  _hp: 3
   repairedPrefab: {fileID: 3533643572825345354, guid: 0c86aaed23c310941bdae3e3b70acbcd,
     type: 3}
   infoIconPrefab: {fileID: 1280226561238346617, guid: 60b208bfddb05da409a29166cf08a6e7,

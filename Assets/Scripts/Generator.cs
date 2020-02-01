@@ -90,7 +90,7 @@ public class Generator : MonoBehaviour
 
     public void Start()
     {
-        for (int i = 0; i < 40; i++)
+        for (int i = 0; i < 45; i++)
             InstantiateLine();
         SpawnScrap(new Vector2Int(-30, 0), new Vector2Int(-5, 0));
     }

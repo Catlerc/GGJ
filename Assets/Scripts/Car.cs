@@ -15,7 +15,7 @@ public class Car : MonoBehaviour
     public float cameraMaxOffset;
     public bool engine;
     private int _score = 0;
-
+    public GameObject smogPrefab;
     public int score
     {
         set
@@ -45,6 +45,7 @@ public class Car : MonoBehaviour
         {
             if (engine)
             {
+                
                 _hp = value;
                 switch (value)
                 {
@@ -84,11 +85,7 @@ public class Car : MonoBehaviour
             if (time > maxTime) starter.EndGame();
         }
 
-        if (!GetComponent<Renderer>().isVisible)
-        {
-            hp -= 1;
-        }
-
+  
 
         repairPoint.map(obj => repair(obj.transform.position));
     }
@@ -96,9 +93,10 @@ public class Car : MonoBehaviour
     public void Respawn() // Будем считать что эта хрень  работает
     {
         var pos = transform.position;
+        Destroy(Instantiate(smogPrefab,pos,Quaternion.identity),5);
         bool spawned = false;
         transform.rotation = Quaternion.identity;
-        var g = Mathf.FloorToInt(cameraObj.transform.position.z / 0.8f+5);
+        var g = Mathf.FloorToInt(cameraObj.transform.position.z / 0.8f)+7;
         for (var i = 0; i < 13 - 4; i++)
         {
             bool canSpawn = true;
@@ -112,7 +110,7 @@ public class Car : MonoBehaviour
 
             if (canSpawn)
             {
-                transform.position = new Vector3((i+1) * 0.8f, pos.y, cameraObj.transform.position.z);
+                transform.position = new Vector3((i+1) * 0.8f, pos.y, cameraObj.transform.position.z-3);
                 spawned = true;
                 break;
             }
@@ -133,7 +131,7 @@ public class Car : MonoBehaviour
 
                 if (canSpawn)
                 {
-                    transform.position = new Vector3((i+1) * 0.8f, pos.y, cameraObj.transform.position.z);
+                    transform.position = new Vector3((i+1) * 0.8f, pos.y, cameraObj.transform.position.z-3);
                     spawned = true;
                     break;
                 }
