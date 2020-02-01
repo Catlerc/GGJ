@@ -7,9 +7,12 @@ public class Starter : MonoBehaviour
     public GameObject cameraObj;
     public Vector3 cameraStartPos, cameraStartRotate;
     private Vector3 cameraWorkPos, cameraWorkRotate;
+    private Car carInstance;
 
     void Start()
     {
+        carInstance = gameObject.GetComponent<Car>();
+        
         cameraWorkPos = cameraObj.transform.position;
         cameraWorkRotate = cameraObj.transform.rotation.eulerAngles;
 
@@ -21,13 +24,14 @@ public class Starter : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Return))
         {
             StartGame();
+            carInstance.MoveCamera();
         }
     }
 
     void StartGame()
     {
         goWorkPos();
-        gameObject.GetComponent<Car>().engine = true;
+        carInstance.engine = true;
     }
 
     void goWorkPos()

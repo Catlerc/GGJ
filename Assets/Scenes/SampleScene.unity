@@ -456,7 +456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.30058795, y: -0, z: -0, w: 0.95375407}
-  m_LocalPosition: {x: 11, y: 6.98, z: -6.04}
+  m_LocalPosition: {x: 11, y: 5.1, z: 2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -510,9 +510,10 @@ MonoBehaviour:
   - {fileID: 5991153405718960115, guid: 4f284c06e7d73f24eb939d6950d5c5c3, type: 3}
   grassPrefabs:
   - {fileID: 4131469707563190567, guid: 5dbf2853e8ab2614d9c5de065ad47215, type: 3}
+  - {fileID: 1034644199375922145, guid: d23855d62009c714581cf4df590df9ac, type: 3}
   - {fileID: 4462125590821569589, guid: cf050e2fc49e8084c9e564ffc27e4a70, type: 3}
   bord: {fileID: 6104329977681039245, guid: 763e14ce4e899e74ebd329b33e9ca534, type: 3}
-  bush: {fileID: 1034644199375922145, guid: d23855d62009c714581cf4df590df9ac, type: 3}
+  bush: {fileID: 0}
 --- !u!4 &1022407430
 Transform:
   m_ObjectHideFlags: 0
@@ -645,7 +646,8 @@ MonoBehaviour:
   rotateSpeed: 25
   forwardSpeed: 7
   cameraObj: {fileID: 963194225}
-  cameraOffsetZ: -6
+  cameraSpeed: 6.5
+  cameraMaxOffset: -6
   engine: 0
 --- !u!65 &1591068847
 BoxCollider:

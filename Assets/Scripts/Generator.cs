@@ -44,11 +44,8 @@ public class Generator : MonoBehaviour
                             bord.InstantiateToMap(new Vector2Int(x * c, lineIndex), 90 * c);
                             break;
                         case int n when n <= width / 2 + 2:
-                            if (Random.Range(0, 2) == 0)
-                                grassPrefabs.PickRandom().InstantiateToMap(new Vector2Int(x * c, lineIndex),
-                                    90 * Random.Range(0, 4));
-                            else
-                                bush.InstantiateToMap(new Vector2Int(x * c, lineIndex), 90 * Random.Range(0, 4));
+                            grassPrefabs.PickRandom().InstantiateToMap(new Vector2Int(x * c, lineIndex),
+                                90 * Random.Range(0, 4));
                             break;
                         default:
                             grassPrefabs.PickRandom().InstantiateToMap(new Vector2Int(x * c, lineIndex), 90 * Random.Range(0, 4));

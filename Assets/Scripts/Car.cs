@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,8 @@ public class Car : MonoBehaviour
     public float rotateSpeed;
     public float forwardSpeed;
     public GameObject cameraObj;
-    public float cameraOffsetZ;
+    public float cameraSpeed;
+    public float cameraMaxOffset;
     public bool engine;
 
     void Start()
@@ -28,7 +30,7 @@ public class Car : MonoBehaviour
     void Move()
     {
         transform.Rotate(0, Input.GetAxis("Horizontal") * Time.deltaTime * rotateSpeed, 0);
-        transform.Translate(Vector3.forward * Time.deltaTime * forwardSpeed);
+        transform.Translate(Vector3.forward * (Time.deltaTime * forwardSpeed));
     }
 
     void CheckRoad()
@@ -37,18 +39,31 @@ public class Car : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 100))
         {
-            Debug.Log(hit.collider);
             if (hit.collider.CompareTag("Border"))
             {
+                print("Hit");
+                print(hit.collider);
                 engine = false;
             }
         }
     }
 
-    void MoveCamera()
+    public void MoveCamera()
     {
-        var oldPos = cameraObj.transform.position;
+        var pos = cameraObj.transform.position;
+        
+        pos.z += Time.deltaTime * cameraSpeed;
 
-        cameraObj.transform.position = new Vector3(oldPos.x, oldPos.y, transform.position.z + cameraOffsetZ);
+        if (transform.position.z > pos.z - cameraMaxOffset)
+        {
+            pos.z = transform.position.z + cameraMaxOffset;
+        }
+        
+        cameraObj.transform.position = pos;
+    }
+
+    private void OnBecameInvisible()
+    {
+        engine = false;
     }
 }
