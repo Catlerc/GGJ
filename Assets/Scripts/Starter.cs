@@ -17,7 +17,9 @@ public class Starter : MonoBehaviour
     public GameObject canvasStartObj;
     public GameObject canvasStatsObj;
     public Dictionary<String, int> ratingDictionary;
-
+    public BabkaAnimation babk;
+    public GameObject hpstat;
+    public GameObject sveto;
     void Start()
     {
         cameraWorkPos = cameraObj.transform.position;
@@ -81,7 +83,12 @@ public class Starter : MonoBehaviour
         }
 
         goWorkPos();
-        carInstance.engine = true;
+        babk.work = true;
+      
+        carInstance.MoveCamera();
+        Camera.main.transform.position-=Vector3.back*5;
+        hpstat.SetActive(true);
+        sveto.SetActive(true);
     }
 
     public void EndGame()

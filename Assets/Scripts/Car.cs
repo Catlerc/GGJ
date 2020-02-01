@@ -16,6 +16,7 @@ public class Car : MonoBehaviour
     public bool engine;
     private int _score = 0;
     public GameObject smogPrefab;
+    
     public int score
     {
         set

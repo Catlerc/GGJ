@@ -6,15 +6,9 @@ using UnityEngine.SceneManagement;
 public class Restarter : MonoBehaviour
 {
     public Generator gen;
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            gen.lineIndex = 0;
-            gen.delLineIndex = 0;
-            print("aDASDA?!");
-            SceneManager.LoadScene(0);
-            
-        }
+        if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(0);
     }
 }
