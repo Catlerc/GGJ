@@ -15,6 +15,7 @@ public class Car : MonoBehaviour
     public int score;
     public int _hp = 3;
     public GameObject repairedPrefab;
+    public GameObject infoIconPrefab;
     public Generator gen;
 
     public int hp
@@ -124,6 +125,8 @@ public class Car : MonoBehaviour
                 var realpos = entity.transform.position;
                 Map.RemoveDynamic(pos);
                 print("SCRAP");
+
+                Instantiate(infoIconPrefab, transform.position, Quaternion.identity);
             }
         }
         return res;
