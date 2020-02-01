@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
+using UnityEngine.UI;
 
 public class Car : MonoBehaviour
 {
@@ -17,6 +19,9 @@ public class Car : MonoBehaviour
     public GameObject repairedPrefab;
     public GameObject infoIconPrefab;
     public Generator gen;
+    public float time = 0;
+    public float maxTime = 60 * 2;
+    public RectTransform progressbar;
 
     public int hp
     {
@@ -44,6 +49,9 @@ public class Car : MonoBehaviour
             Move();
             CheckRoad();
             MoveCamera();
+            time += Time.deltaTime;
+            progressbar.sizeDelta=new Vector2(778.45f - 778.45f * time / maxTime,63.39999f);
+            
         }
 
         if (!GetComponent<Renderer>().isVisible)
@@ -99,6 +107,7 @@ public class Car : MonoBehaviour
             gen.InstantiateLine();
             gen.delLine();
         }
+
         cameraObj.transform.position = pos;
     }
 
@@ -118,6 +127,7 @@ public class Car : MonoBehaviour
                 var newEntity = Instantiate(repairedPrefab, realpos, Quaternion.identity).GetComponent<Entity>();
                 Map.Set(pos, newEntity);
             }
+
             if (hit.collider.CompareTag("scrap"))
             {
                 res = true;
@@ -130,6 +140,7 @@ public class Car : MonoBehaviour
                 Instantiate(infoIconPrefab, transform.position, Quaternion.identity);
             }
         }
+
         return res;
     }
 
