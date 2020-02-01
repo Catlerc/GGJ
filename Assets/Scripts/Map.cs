@@ -12,7 +12,9 @@ public static class Map
         {
             if (StaticMap.ContainsKey(pos))
             {
-                Debug.LogWarning($"Object {entity.name} can't be spawned on dynamic map.");
+                
+                Debug.LogWarning($"Object {entity.name} can't be spawned on static map.");
+                entity.Destroy();
                 return false;
             }
             else
@@ -26,7 +28,7 @@ public static class Map
         {
             if (DynamicMap.ContainsKey(pos))
             {
-                Debug.LogWarning($"Object {entity.name} can't be spawned on static map.");
+                Debug.LogWarning($"Object {entity.name} can't be spawned on dynamic map.");
                 return false;
             }
             else
@@ -57,6 +59,11 @@ public static class Map
     {
         if (StaticMap.TryGetValue(pos, out var entity1)) Object.Destroy(entity1);
         StaticMap.Remove(pos);
+    }
+
+    public static bool Test(Vector2Int pos)
+    {
+        return StaticMap.ContainsKey(pos);
     }
 
 }

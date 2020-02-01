@@ -60,6 +60,7 @@ public class Car : MonoBehaviour
     {
         var pos = transform.position;
         transform.position = new Vector3(0, pos.y, cameraObj.transform.position.z);
+        transform.rotation = Quaternion.identity;
     }
 
     void EndGame()
@@ -130,5 +131,11 @@ public class Car : MonoBehaviour
             }
         }
         return res;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        print("waat");
+        if (other.CompareTag("dead")) hp -= 1;
     }
 }

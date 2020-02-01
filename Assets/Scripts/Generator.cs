@@ -10,6 +10,7 @@ public class Generator : MonoBehaviour
     public GameObject[] grassPrefabs;
     public GameObject bord;
     public GameObject[] scrap;
+    public GameObject[] big;
     private readonly int width = 32;
     public int lineIndex = 0;
     public int delLineIndex = 0;
@@ -17,6 +18,26 @@ public class Generator : MonoBehaviour
 
     public void InstantiateLine()
     {
+        if (Random.Range(0f, 100f) < lineIndex / 40f)
+        {
+            var pos = new Vector2Int(Random.Range(-15, 15), lineIndex);
+
+            bool okay = true;
+            for (var x = 0; x < 4; x++)
+            {
+                if (Map.Test(pos + Vector2Int.right * x)) okay = false;
+            }
+
+            if (okay)
+            {
+                var entity = big.PickRandom().InstantiateToMap(pos, 0);
+                for (var x = 0; x < 4; x++)
+                for (var y = 0; y < 4; y++)
+                    if (!(x == 0 && y == 0))
+                        Map.Set(pos + Vector2Int.up * x + Vector2Int.right * y, entity);
+            }
+        }
+
         for (var x = 0; x <= width / 2 + 5; x++)
         {
             Repeat.Func(c =>
@@ -45,7 +66,7 @@ public class Generator : MonoBehaviour
         }
 
         if (Random.Range(0, 100) < lineIndex / 4f)
-            SpawnScrap(new Vector2Int(-30, lineIndex+10), new Vector2Int(Random.Range(-28, 28), lineIndex));
+            SpawnScrap(new Vector2Int(-30, lineIndex + 10), new Vector2Int(Random.Range(-20, 20), lineIndex));
 
 
         lineIndex++;
@@ -55,20 +76,17 @@ public class Generator : MonoBehaviour
     {
         delLineIndex++;
         for (var x = 0; x <= width / 2 + 5; x++)
-        {
             Repeat.Func(c =>
             {
                 c = c == 0 ? 1 : -1;
                 Map.Remove(new Vector2Int(c * x, delLineIndex));
             }, 2);
-        }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector3(width, 0, 10));
     }
-    //TEST 
 
     public void Start()
     {
