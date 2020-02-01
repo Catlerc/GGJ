@@ -15,13 +15,17 @@ public class Car : MonoBehaviour
     public float cameraMaxOffset;
     public bool engine;
     public int score;
-    public int _hp = 3;
+    public int _hp = 4;
     public GameObject repairedPrefab;
     public GameObject infoIconPrefab;
     public Generator gen;
     public float time = 0;
     public float maxTime = 60 * 2;
     public RectTransform progressbar;
+    public Starter starter;
+    public GameObject HPImage1;
+    public GameObject HPImage2;
+    public GameObject HPImage3;
 
     public int hp
     {
@@ -30,7 +34,20 @@ public class Car : MonoBehaviour
             if (engine)
             {
                 _hp = value;
-                print("-HP");
+                switch (value)
+                {
+                    
+                    case 2:
+                        Destroy(HPImage3);
+                        break;
+                    case 1:
+                        Destroy(HPImage2);
+                        break;
+                    case 0:
+                        starter.EndGame();
+                        break;
+                    
+                }
                 Respawn();    
             }
             
@@ -61,7 +78,6 @@ public class Car : MonoBehaviour
         if (!GetComponent<Renderer>().isVisible)
         {
             hp -= 1;
-            print("!!!!!ASD");
         }
 
 
@@ -137,10 +153,7 @@ public class Car : MonoBehaviour
                 res = true;
                 var entity = hit.collider.GetComponent<Entity>();
                 var pos = entity.pos;
-                var realpos = entity.transform.position;
                 Map.RemoveDynamic(pos);
-                print("SCRAP");
-
                 Instantiate(infoIconPrefab, transform.position, Quaternion.identity);
             }
         }
@@ -150,7 +163,6 @@ public class Car : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("waat");
         if (other.CompareTag("dead")) hp -= 1;
     }
 }
