@@ -603,7 +603,7 @@ MonoBehaviour:
   - {fileID: 583736471}
   - {fileID: 1137425081}
   - {fileID: 208920671}
-  rotateSpeed: 180
+  rotateSpeed: 200
   forwardSpeed: 10
   cameraObj: {fileID: 963194225}
   cameraSpeed: 0

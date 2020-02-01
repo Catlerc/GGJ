@@ -13,7 +13,7 @@ public class Generator : MonoBehaviour
     private readonly int width = 32;
     public int lineIndex = 0;
     public int delLineIndex = 0;
-    private int _noiseTranslation = 100;
+    private int noiseTranslation = 100;
 
     public void InstantiateLine()
     {
@@ -43,6 +43,11 @@ public class Generator : MonoBehaviour
                     }
                 }, x == 0 ? 1 : 2);
         }
+
+        if (Random.Range(0, 100) < lineIndex / 4f)
+            SpawnScrap(new Vector2Int(-30, lineIndex+10), new Vector2Int(Random.Range(-28, 28), lineIndex));
+
+
         lineIndex++;
     }
 
@@ -77,6 +82,6 @@ public class Generator : MonoBehaviour
         var entity = scrap.PickRandom().InstantiateToMap(endPos);
         var anim = entity.gameObject.GetComponent<ScrapFallAnimation>();
         anim.startPos = new Vector3(startPos.x * 0.8f, 0, startPos.y * 0.8f);
-        anim.endPos = new Vector3(endPos.x * 0.8f, 0, endPos.y * 0.8f);
+        anim.endPos = new Vector3(endPos.x * 0.8f, .01f, endPos.y * 0.8f);
     }
 }

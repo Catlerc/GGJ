@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 924903899711094431}
   - component: {fileID: 1374746865342806126}
   - component: {fileID: 3389234562529257280}
+  - component: {fileID: 5435216220689573912}
   m_Layer: 0
   m_Name: Sigi
-  m_TagString: Untagged
+  m_TagString: scrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,6 +63,19 @@ MonoBehaviour:
   startPos: {x: 0, y: 0, z: 0}
   endPos: {x: 0, y: 0, z: 0}
   time: 0
+--- !u!65 &5435216220689573912
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4219506621773106316}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 0.1, z: 0.4}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7674969690733095185
 GameObject:
   m_ObjectHideFlags: 0

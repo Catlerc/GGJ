@@ -24,7 +24,7 @@ public class ScrapFallAnimation : MonoBehaviour
             transform.rotation = Quaternion.identity;
             var pos = transform.position += Random.insideUnitSphere / 3f;
             pos.y = 0;
-            transform.position = pos;
+            transform.position = pos+new Vector3(0,0.1f,0);
             Destroy(this);
         }
     }

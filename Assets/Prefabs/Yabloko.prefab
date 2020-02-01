@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2313774321144868921}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4, y: -2, z: 0.4}
+  m_LocalPosition: {x: 0.4, y: -1.82, z: 0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5065210423442974647}
@@ -90,9 +90,10 @@ GameObject:
   - component: {fileID: 5065210423442974647}
   - component: {fileID: 8596607457802050033}
   - component: {fileID: 6249506489735121571}
+  - component: {fileID: 2174835735472928560}
   m_Layer: 0
   m_Name: Yabloko
-  m_TagString: Untagged
+  m_TagString: scrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,3 +142,16 @@ MonoBehaviour:
   startPos: {x: 0, y: 0, z: 0}
   endPos: {x: 0, y: 0, z: 0}
   time: 0
+--- !u!65 &2174835735472928560
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8075068291275183524}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.65, y: 0.1, z: 0.58}
+  m_Center: {x: 0, y: 0, z: 0}

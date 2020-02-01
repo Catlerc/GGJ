@@ -21,6 +21,7 @@ public class Car : MonoBehaviour
         set
         {
             _hp = value;
+            print("-HP");
             Respawn();
         }
         get => _hp;
@@ -42,9 +43,10 @@ public class Car : MonoBehaviour
             MoveCamera();
         }
 
-        if (!_renderer.isVisible)
+        if (!GetComponent<Renderer>().isVisible)
         {
             hp -= 1;
+            print("!!!!!ASD");
         }
 
 
@@ -102,9 +104,18 @@ public class Car : MonoBehaviour
                 var entity = hit.collider.GetComponent<Entity>();
                 var pos = entity.pos;
                 var realpos = entity.transform.position;
-                Map.Remove(pos);
+                Map.RemoveStatic(pos);
                 var newEntity = Instantiate(repairedPrefab, realpos, Quaternion.identity).GetComponent<Entity>();
                 Map.Set(pos, newEntity);
+            }
+            if (hit.collider.CompareTag("scrap"))
+            {
+                res = true;
+                var entity = hit.collider.GetComponent<Entity>();
+                var pos = entity.pos;
+                var realpos = entity.transform.position;
+                Map.RemoveDynamic(pos);
+                print("SCRAP");
             }
         }
         return res;
