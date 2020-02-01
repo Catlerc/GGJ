@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using UnityEngine;
@@ -47,13 +46,13 @@ public static class Utils
         return newArray;
     }
 
-    public static void map<TA>(this IEnumerable<TA> array, Action<TA> func)
+    public static void map<TA>(this TA[] array, Action<TA> func)
     {
         foreach (var item in array)
             func(item);
     }
 
-    public static void map<TA>(this IEnumerable<TA> array, Action<TA, int> func)
+    public static void map<TA>(this TA[] array, Action<TA, int> func)
     {
         var i = 0;
         foreach (var item in array)
@@ -69,10 +68,10 @@ public static class Utils
     {
         var maxNoiseValue = 0f;
         var maxObj = array[0];
-        for (var i = 0; i < array.Length; i++)
+        for (var i=0;i<array.Length;i++)
         {
             var scale = 15f - i * 3;
-            var value = Mathf.PerlinNoise(pos.x / scale + 100 + i, pos.y / scale + 100);
+            var value = Mathf.PerlinNoise(pos.x / scale + 100+i, pos.y / scale + 100);
             if (value > maxNoiseValue)
             {
                 maxNoiseValue = value;
