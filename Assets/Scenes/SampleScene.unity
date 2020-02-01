@@ -145,7 +145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 208920671}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.448, y: 0, z: -0.113000005}
+  m_LocalPosition: {x: 0.239, y: 0, z: -0.227}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1591068850}
@@ -503,6 +503,8 @@ MonoBehaviour:
   - {fileID: 1149469703558992556, guid: f646c20521a707848bb4c1eb3e3bad7a, type: 3}
   - {fileID: 4219506621773106316, guid: c1738ca72a5cb3a4b936b94663a76ac0, type: 3}
   - {fileID: 8075068291275183524, guid: aed627ec795ef374d9f1a602a55aff66, type: 3}
+  lineIndex: 0
+  delLineIndex: 0
 --- !u!4 &1022407430
 Transform:
   m_ObjectHideFlags: 0
@@ -555,7 +557,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1137425081}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.402, y: 0, z: -0.113}
+  m_LocalPosition: {x: -0.257, y: 0, z: -0.236}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1591068850}
@@ -601,15 +603,16 @@ MonoBehaviour:
   - {fileID: 583736471}
   - {fileID: 1137425081}
   - {fileID: 208920671}
-  rotateSpeed: 130
+  rotateSpeed: 180
   forwardSpeed: 10
   cameraObj: {fileID: 963194225}
   cameraSpeed: 0
-  cameraMaxOffset: -6
+  cameraMaxOffset: -9
   engine: 1
   _hp: 3
   repairedPrefab: {fileID: 3533643572825345354, guid: 0c86aaed23c310941bdae3e3b70acbcd,
     type: 3}
+  gen: {fileID: 1022407429}
 --- !u!65 &1591068847
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -678,7 +681,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591068845}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.65, z: 0}
+  m_LocalPosition: {x: 0, y: 0.65, z: 16.43}
   m_LocalScale: {x: 2.4, y: 1, z: 3.2}
   m_Children:
   - {fileID: 582095225}

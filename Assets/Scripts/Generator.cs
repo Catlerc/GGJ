@@ -11,9 +11,9 @@ public class Generator : MonoBehaviour
     public GameObject bord;
     public GameObject[] scrap;
     private readonly int width = 32;
-    private int lineIndex = 0;
-
-    private int noiseTranslation = 100;
+    public int lineIndex = 0;
+    public int delLineIndex = 0;
+    private int _noiseTranslation = 100;
 
     public void InstantiateLine()
     {
@@ -43,10 +43,21 @@ public class Generator : MonoBehaviour
                     }
                 }, x == 0 ? 1 : 2);
         }
-
         lineIndex++;
     }
 
+    public void delLine()
+    {
+        delLineIndex++;
+        for (var x = 0; x <= width / 2 + 5; x++)
+        {
+            Repeat.Func(c =>
+            {
+                c = c == 0 ? 1 : -1;
+                Map.Remove(new Vector2Int(c * x, delLineIndex));
+            }, 2);
+        }
+    }
 
     private void OnDrawGizmos()
     {
@@ -56,9 +67,9 @@ public class Generator : MonoBehaviour
 
     public void Start()
     {
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 40; i++)
             InstantiateLine();
-        SpawnScrap(new Vector2Int(-30,0),new Vector2Int(-5,0));
+        SpawnScrap(new Vector2Int(-30, 0), new Vector2Int(-5, 0));
     }
 
     public void SpawnScrap(Vector2Int startPos, Vector2Int endPos)

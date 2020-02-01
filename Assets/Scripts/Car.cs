@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class Car : MonoBehaviour
     public bool engine;
     public int _hp = 3;
     public GameObject repairedPrefab;
+    public Generator gen;
 
     public int hp
     {
@@ -68,7 +70,6 @@ public class Car : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 100))
         {
-            print(hit.collider);
             if (hit.collider.CompareTag("Border")) hp -= 1;
         }
     }
@@ -76,14 +77,16 @@ public class Car : MonoBehaviour
     public void MoveCamera()
     {
         var pos = cameraObj.transform.position;
-
         pos.z += Time.deltaTime * cameraSpeed;
-
         if (transform.position.z > pos.z - cameraMaxOffset)
             pos.z = transform.position.z + cameraMaxOffset;
         else
-            pos.z += Time.deltaTime;
-
+            pos.z += Time.deltaTime * 3;
+        for (float i = gen.lineIndex * 0.8f; i <= Mathf.FloorToInt(transform.position.z) + 16; i++)
+        {
+            gen.InstantiateLine();
+            gen.delLine();
+        }
         cameraObj.transform.position = pos;
     }
 
@@ -91,10 +94,8 @@ public class Car : MonoBehaviour
     {
         bool res = false;
         RaycastHit hit;
-
         if (Physics.Raycast(posArg, Vector3.down, out hit, 10))
         {
-            print(hit.collider.name + "|");
             if (hit.collider.CompareTag("Repairable1"))
             {
                 res = true;
@@ -106,7 +107,6 @@ public class Car : MonoBehaviour
                 Map.Set(pos, newEntity);
             }
         }
-
         return res;
     }
 }

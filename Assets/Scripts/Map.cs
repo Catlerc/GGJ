@@ -43,8 +43,10 @@ public static class Map
     public static void Remove(Vector2Int pos)
     {
         
-        if (StaticMap.TryGetValue(pos, out var entity)) Object.Destroy(entity);
+        if (StaticMap.TryGetValue(pos, out var entity1)) Object.Destroy(entity1);
         StaticMap.Remove(pos);
+        if (DynamicMap.TryGetValue(pos, out var entity2)) Object.Destroy(entity2);
+        DynamicMap.Remove(pos);
     }
 
 
