@@ -4,6 +4,7 @@ using UnityEngine;
 public static class Map
 {
     private static readonly Dictionary<Vector2Int, Entity> StaticMap = new Dictionary<Vector2Int, Entity>();
+    public static int LineSpawned = 0;
 
     public static bool Set(Vector2Int pos, Entity entity)
     {
@@ -24,5 +25,10 @@ public static class Map
     {
         if (StaticMap.TryGetValue(pos, out var entity)) entity.Destroy();
         StaticMap.Remove(pos);
+    }
+
+    public static void InstantiateLine(GameObject[] line)
+    {
+        line.imap((prefab, index) => prefab.InstantiateToMap(new Vector2Int(index, LineSpawned)));
     }
 }
