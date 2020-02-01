@@ -7,22 +7,24 @@ public static class Utils
 {
     public static Entity InstantiateToMap(this GameObject prefab, Vector2Int pos)
     {
-        var entity = Object.Instantiate(prefab, new Vector3(pos.x*Generator.SizeOfTileSide, 0, pos.y*Generator.SizeOfTileSide), Quaternion.identity)
+        var entity = Object.Instantiate(prefab,
+                new Vector3(pos.x * Generator.SizeOfTileSide, 0, pos.y * Generator.SizeOfTileSide), Quaternion.identity)
             .GetComponent<Entity>();
         if (entity == null) Debug.LogWarning("Spawn non Entity!");
         else
-            global::Map.Set(pos, entity);
+            Map.Set(pos, entity);
         return entity;
     }
-    
+
     public static Entity InstantiateToMap(this GameObject prefab, Vector2Int pos, float rotation)
     {
-        var entity = Object.Instantiate(prefab, new Vector3(pos.x*Generator.SizeOfTileSide, 0, pos.y*Generator.SizeOfTileSide), Quaternion.identity)
+        var entity = Object.Instantiate(prefab,
+                new Vector3(pos.x * Generator.SizeOfTileSide, 0, pos.y * Generator.SizeOfTileSide), Quaternion.identity)
             .GetComponent<Entity>();
-        entity.transform.rotation = Quaternion.Euler(0,rotation,0);
+        entity.transform.rotation = Quaternion.Euler(0, rotation, 0);
         if (entity == null) Debug.LogWarning("Spawn non Entity!");
         else
-            global::Map.Set(pos, entity);
+            Map.Set(pos, entity);
         return entity;
     }
 
@@ -34,7 +36,7 @@ public static class Utils
         return newArray;
     }
 
-    public static TB[] imap<TA, TB>(this TA[] array, Func<TA, int, TB> func)
+    public static TB[] map<TA, TB>(this TA[] array, Func<TA, int, TB> func)
     {
         var newArray = new TB[array.Length];
         for (var i = 0; i < array.Length; i++)
@@ -48,7 +50,7 @@ public static class Utils
             func(item);
     }
 
-    public static void imap<TA>(this TA[] array, Action<TA, int> func)
+    public static void map<TA>(this TA[] array, Action<TA, int> func)
     {
         var i = 0;
         foreach (var item in array)
@@ -56,5 +58,14 @@ public static class Utils
             func(item, i);
             i++;
         }
+    }
+}
+
+public static class Repeat
+{
+    public static void Func(Action<int> func, int count)
+    {
+        for (var i = 0; i < count; i++)
+            func(i);
     }
 }
