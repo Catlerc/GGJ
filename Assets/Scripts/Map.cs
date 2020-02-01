@@ -3,8 +3,7 @@ using UnityEngine;
 
 public static class Map
 {
-    private static readonly Dictionary<Vector2Int, Entity> StaticMap = new Dictionary<Vector2Int, Entity>();
-    public static int LineSpawned = 0;
+    private static readonly Dictionary<Vector2Int, GameObject> StaticMap = new Dictionary<Vector2Int, GameObject>();
 
     public static bool Set(Vector2Int pos, Entity entity)
     {
@@ -15,7 +14,7 @@ public static class Map
         }
         else
         {
-            StaticMap.Add(pos, entity);
+            StaticMap.Add(pos, entity.gameObject);
             entity.pos = pos;
             return true;
         }
@@ -23,12 +22,9 @@ public static class Map
 
     public static void Remove(Vector2Int pos)
     {
-        if (StaticMap.TryGetValue(pos, out var entity)) entity.Destroy();
+        if (StaticMap.TryGetValue(pos, out var entity)) Object.Destroy(entity);
         StaticMap.Remove(pos);
     }
 
-    public static void InstantiateLine(GameObject[] line)
-    {
-        line.imap((prefab, index) => prefab.InstantiateToMap(new Vector2Int(index, LineSpawned)));
-    }
+
 }

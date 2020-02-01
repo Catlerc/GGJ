@@ -1,28 +1,42 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class Generator: MonoBehaviour
-{ 
-    public GameObject tilePrefab;
-    public GameObject brokenPrefab;
+{
+    [NonSerialized]
+    public static float SizeOfTileSide = 8 / 10f;
+    public GameObject[] prefabs;
+    public GameObject bord;
+    [NonSerialized]
     public readonly int width = 28;
     public int lineIndex = 0;
-    public GameObject[] GetNewLine()
+    public void InstantiateLine()
     {
-        var array = new GameObject[width].imap((_,i) =>
+        for (var i = 1; i <=width;i++)
         {
-            switch (Random.Range(1, 2))
+            switch (i)
             {
                 case 1:
-                    return tilePrefab;
-                case 2:
-                    return brokenPrefab;
+                    bord.InstantiateToMap(new Vector2Int(i,lineIndex),-90);
+                    break;
+                case int index when index==width:
+                    bord.InstantiateToMap(new Vector2Int(i,lineIndex),90);
+                    break;
+                default:
+                    prefabs[Random.Range(0, prefabs.Length)].InstantiateToMap(new Vector2Int(i,lineIndex), 90*Random.Range(0,4));    
+                    break;
             }
-            Debug.LogWarning("Null prefab on map.");
-            return null;
-        });
-        return array;
+        }
+        lineIndex++;
     }
+    
+    //TEST 
 
-
+    public void Start()
+    {
+        for (int i=0;i<20;i++)
+            InstantiateLine();
+    }
 }
