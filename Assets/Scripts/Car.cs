@@ -4,16 +4,31 @@ using UnityEngine;
 
 public class Car : MonoBehaviour
 {
+    public GameObject[] repairPoint;
     public float rotateSpeed;
     public float forwardSpeed;
     public GameObject cameraObj;
     public float cameraSpeed;
     public float cameraMaxOffset;
     public bool engine;
+    public int _hp = 3;
+    public GameObject repairedPrefab;
+
+    public int hp
+    {
+        set
+        {
+            _hp = value;
+            Respawn();
+        }
+        get => _hp;
+    }
+
+    private Renderer _renderer;
 
     void Start()
     {
-        engine = false;
+        _renderer = GetComponent<Renderer>();
     }
 
     void Update()
@@ -24,13 +39,26 @@ public class Car : MonoBehaviour
             CheckRoad();
             MoveCamera();
         }
+
+        if (!_renderer.isVisible)
+        {
+            hp -= 1;
+        }
+
+
+        repairPoint.map(obj => repair(obj.transform.position));
+    }
+
+    public void Respawn()
+    {
+        var pos = transform.position;
+        transform.position = new Vector3(0, pos.y, cameraObj.transform.position.z);
     }
 
     void Move()
     {
         var newAngle = Input.GetAxis("Horizontal") * Time.deltaTime * rotateSpeed + transform.rotation.eulerAngles.y;
-        if (!(newAngle > 80 && newAngle < 280))
-            transform.rotation = Quaternion.Euler(new Vector3(0, newAngle, 0));
+        transform.rotation = Quaternion.Euler(new Vector3(0, newAngle, 0));
         transform.Translate(Vector3.forward * (Time.deltaTime * forwardSpeed));
     }
 
@@ -41,31 +69,44 @@ public class Car : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 100))
         {
             print(hit.collider);
-            if (hit.collider.CompareTag("Border"))
-            {
-                print("Hit");
-                print(hit.collider);
-                engine = false;
-            }
+            if (hit.collider.CompareTag("Border")) hp -= 1;
         }
     }
 
     public void MoveCamera()
     {
         var pos = cameraObj.transform.position;
-        
+
         pos.z += Time.deltaTime * cameraSpeed;
 
         if (transform.position.z > pos.z - cameraMaxOffset)
-        {
             pos.z = transform.position.z + cameraMaxOffset;
-        }
-        
+        else
+            pos.z += Time.deltaTime;
+
         cameraObj.transform.position = pos;
     }
 
-    private void OnBecameInvisible()
+    public bool repair(Vector3 posArg)
     {
-        engine = false;
+        bool res = false;
+        RaycastHit hit;
+
+        if (Physics.Raycast(posArg, Vector3.down, out hit, 10))
+        {
+            print(hit.collider.name + "|");
+            if (hit.collider.CompareTag("Repairable1"))
+            {
+                res = true;
+                var entity = hit.collider.GetComponent<Entity>();
+                var pos = entity.pos;
+                var realpos = entity.transform.position;
+                Map.Remove(pos);
+                var newEntity = Instantiate(repairedPrefab, realpos, Quaternion.identity).GetComponent<Entity>();
+                Map.Set(pos, newEntity);
+            }
+        }
+
+        return res;
     }
 }
