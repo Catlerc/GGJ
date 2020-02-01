@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -14,7 +15,6 @@ public class Generator : MonoBehaviour
     private readonly int width = 32;
     public int lineIndex = 0;
     public int delLineIndex = 0;
-    private int noiseTranslation = 100;
 
     public void InstantiateLine()
     {
@@ -90,9 +90,8 @@ public class Generator : MonoBehaviour
 
     public void Start()
     {
-        for (int i = 0; i < 45; i++)
-            InstantiateLine();
-        SpawnScrap(new Vector2Int(-30, 0), new Vector2Int(-5, 0));
+        lineIndex = 0;
+        delLineIndex = -35;
     }
 
     public void SpawnScrap(Vector2Int startPos, Vector2Int endPos)
