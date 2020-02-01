@@ -27,9 +27,13 @@ public class Car : MonoBehaviour
     {
         set
         {
-            _hp = value;
-            print("-HP");
-            Respawn();
+            if (engine)
+            {
+                _hp = value;
+                print("-HP");
+                Respawn();    
+            }
+            
         }
         get => _hp;
     }
