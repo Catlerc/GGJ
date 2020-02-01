@@ -10,6 +10,7 @@ public class Generator : MonoBehaviour
     public GameObject[] grassPrefabs;
     public GameObject bord;
     public GameObject[] scrap;
+    
     private readonly int width = 32;
     public int lineIndex = 0;
     public int delLineIndex = 0;
