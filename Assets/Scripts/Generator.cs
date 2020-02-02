@@ -107,8 +107,17 @@ public class Generator : MonoBehaviour
     {
         for (var x = 0; x < 4; x++)
         for (var y = 0; y < 4; y++)
-            if (Map.Get(endPos).CompareTag("dead"))
-                return;
+        {
+            var a = Map.Get(endPos);
+
+
+            if (a != null)
+            {
+                if (a.CompareTag("dead"))
+                    return;
+            }
+        }
+
         var entity = scrap.PickRandom().InstantiateToMap(endPos);
         var anim = entity.gameObject.GetComponent<ScrapFallAnimation>();
         anim.startPos = new Vector3(startPos.x * 0.8f, 0, startPos.y * 0.8f);
@@ -125,8 +134,15 @@ public class Generator : MonoBehaviour
     {
         for (var x = 0; x < 4; x++)
         for (var y = 0; y < 4; y++)
-            if (Map.Get(endPos).CompareTag("dead"))
-                return;
+        {
+            var a = Map.Get(endPos);
+            if (a != null)
+            {
+                if (a.CompareTag("dead"))
+                    return;
+            }
+        }
+
         var entity = meteorits.PickRandom().InstantiateToMap(startPos).gameObject;
         var anim = entity.GetComponent<Meteorit>();
         anim.startPos = new Vector3(startPos.x * 0.8f, 7, startPos.y * 0.8f);

@@ -18,14 +18,13 @@ public class Car : MonoBehaviour
     public GameObject smogPrefab;
     public GameObject smog;
     public bool ssfds = true;
-    
+
     public int score
     {
         set
         {
             _score = value;
             text.text = $"Очки: {value}";
-            
         }
         get => _score;
     }
@@ -43,14 +42,13 @@ public class Car : MonoBehaviour
     public GameObject HPImage3;
     public Text text;
     public AudioSource music;
-    
+
     public int hp
     {
         set
         {
             if (engine)
             {
-                
                 _hp = value;
                 switch (value)
                 {
@@ -88,6 +86,7 @@ public class Car : MonoBehaviour
                 ssfds = false;
                 smog.SetActive(true);
             }
+
             Move();
             CheckRoad();
             MoveCamera();
@@ -96,58 +95,64 @@ public class Car : MonoBehaviour
             if (time > maxTime) starter.EndGame();
         }
 
-        music.pitch = 1 + time / maxTime / 2 ;
-  
+        music.pitch = 1 + time / maxTime / 2;
+
 
         repairPoint.map(obj => repair(obj.transform.position));
     }
 
+
     public void Respawn() // Будем считать что эта хрень  работает
     {
         var pos = transform.position;
-        Destroy(Instantiate(smogPrefab,pos,Quaternion.identity),5);
+        Destroy(Instantiate(smogPrefab, pos, Quaternion.identity), 5);
         bool spawned = false;
         transform.rotation = Quaternion.identity;
-        var g = Mathf.FloorToInt(cameraObj.transform.position.z / 0.8f)+4;
-        for (var i = 0; i < 13 - 4; i++)
+        var g = Mathf.FloorToInt(cameraObj.transform.position.z / 0.8f) + 8;
+        for (var i = 0; i < 9; i++)
         {
             bool canSpawn = true;
-            for (int j = -2; j < 4; j++)
-            for (int j2 = 0; j < 14; j++)
+            for (int j = 0; j < 4; j++)
+            for (int j2 = 0; j2 < 14; j2++)
+            {
                 if (Map.Get(new Vector2Int(i + j, g + j2)).CompareTag("dead"))
                 {
                     canSpawn = false;
                     break;
                 }
+            }
 
             if (canSpawn)
             {
-                transform.position = new Vector3((i+1) * 0.8f, pos.y, cameraObj.transform.position.z-1);
+                transform.position = new Vector3((i + 1) * 0.8f, pos.y, cameraObj.transform.position.z - 1);
                 spawned = true;
                 break;
             }
         }
 
-        if (!spawned)//https://s.fishki.net/upload/users/2019/12/30/482/696a27c4296dfcdbea055c8c17e702ae.jpg
-            for (var i = -13; i < 0; i++)
+        if (!spawned) //https://s.fishki.net/upload/users/2019/12/30/482/696a27c4296dfcdbea055c8c17e702ae.jpg
+        {
+            for (var i = -9; i < 0; i++)
             {
                 bool canSpawn = true;
-                for (int j = -2; j <= 4; j++)
-                for (int j2 = 0; j < 14; j++)
-
+                for (int j = 0; j < 4; j++)
+                for (int j2 = 0; j2 < 14; j2++)
+                {
                     if (Map.Get(new Vector2Int(i + j, g + j2)).CompareTag("dead"))
                     {
                         canSpawn = false;
                         break;
                     }
+                }
 
                 if (canSpawn)
                 {
-                    transform.position = new Vector3((i+1) * 0.8f, pos.y, cameraObj.transform.position.z-3);
+                    transform.position = new Vector3((i + 1) * 0.8f, pos.y, cameraObj.transform.position.z - 1);
                     spawned = true;
                     break;
                 }
             }
+        }
     }
 
     void EndGame()
@@ -169,7 +174,11 @@ public class Car : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 100))
         {
-            if (hit.collider.CompareTag("Border")) hp -= 1;
+            if (hit.collider.CompareTag("Border"))
+            {
+                hp -= 1;
+                print("BORDER");
+            }
         }
     }
 
@@ -224,6 +233,10 @@ public class Car : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("dead")) hp -= 1;
+        if (other.CompareTag("dead"))
+        {
+            hp -= 1;
+            print("IS " + other.name);
+        }
     }
 }
