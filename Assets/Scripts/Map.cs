@@ -65,5 +65,10 @@ public static class Map
     {
         return StaticMap.ContainsKey(pos);
     }
+    public static GameObject Get(Vector2Int pos)
+    {
+        return StaticMap[pos];
+    }
+
 
 }

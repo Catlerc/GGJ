@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 955630bb9b91d1349b4610031cb7cc27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toScore: 10
   pos: {x: 0, y: 0}
   isStatic: 1
 --- !u!65 &5896476680983374757
