@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2155,6 +2155,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 215188553029582111}
     m_Modifications:
+    - target: {fileID: -5365014607122359985, guid: 5301ac997c97a334ca7222fb06f2bf7d,
+        type: 3}
+      propertyPath: speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5365014607122359985, guid: 5301ac997c97a334ca7222fb06f2bf7d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 875612728738727002, guid: 5301ac997c97a334ca7222fb06f2bf7d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7931,8 +7941,14 @@ MonoBehaviour:
   - {fileID: 1149469703558992556, guid: f646c20521a707848bb4c1eb3e3bad7a, type: 3}
   - {fileID: 4219506621773106316, guid: c1738ca72a5cb3a4b936b94663a76ac0, type: 3}
   - {fileID: 8075068291275183524, guid: aed627ec795ef374d9f1a602a55aff66, type: 3}
+  runners:
+  - {fileID: 4214688635651274313, guid: 5301ac997c97a334ca7222fb06f2bf7d, type: 3}
+  - {fileID: 8201542169578540519, guid: 86f3032d98635cd4897c0bfa90f3824b, type: 3}
   big:
   - {fileID: 5672125278032291158, guid: 77f4f4c439da1234597f3b0ffd3d3067, type: 3}
+  meteorits:
+  - {fileID: 4483339574340057952, guid: 569ff7e7925046b499354ea19c6c7957, type: 3}
+  - {fileID: 5535940767185922320, guid: 4fa9a47d54f2c7d47b6c6d40e0347180, type: 3}
   lineIndex: 0
   delLineIndex: 0
 --- !u!4 &1022407430
@@ -16512,6 +16528,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1591068850}
     m_Modifications:
+    - target: {fileID: -5365014607122359985, guid: 5301ac997c97a334ca7222fb06f2bf7d,
+        type: 3}
+      propertyPath: speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5365014607122359985, guid: 5301ac997c97a334ca7222fb06f2bf7d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 875612728738727002, guid: 5301ac997c97a334ca7222fb06f2bf7d,
         type: 3}
       propertyPath: m_LocalPosition.x

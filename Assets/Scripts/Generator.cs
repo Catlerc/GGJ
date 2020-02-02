@@ -13,6 +13,7 @@ public class Generator : MonoBehaviour
     public GameObject[] scrap;
     public GameObject[] runners;
     public GameObject[] big;
+    public GameObject[] meteorits;
     private readonly int width = 32;
     public int lineIndex = 0;
     public int delLineIndex = 0;
@@ -72,6 +73,9 @@ public class Generator : MonoBehaviour
         if (Random.Range(0, 300) < lineIndex / 4f)
             SpawnEntityRunner(new Vector2Int(Random.Range(0, 2) * 40 - 20, lineIndex), new Vector2Int(-30, lineIndex + 10));
 
+        if (Random.Range(0, 300) < lineIndex / 4f)
+            SpawnEntityMeteorit(new Vector2Int(Random.Range(0, 2) * 40 - 20, lineIndex - 25), new Vector2Int(Random.Range(-15, 15), lineIndex));
+
         lineIndex++;
     }
 
@@ -109,5 +113,14 @@ public class Generator : MonoBehaviour
     {
         var entity = runners.PickRandom().InstantiateToMap(startPos).gameObject;
         entity.transform.Rotate(0, startPos.x > 14 ? 270 : 90, 0);
+    }
+    
+    public void SpawnEntityMeteorit(Vector2Int startPos, Vector2Int endPos)
+    {
+        var entity = meteorits.PickRandom().InstantiateToMap(startPos).gameObject;
+        var anim = entity.GetComponent<Meteorit>();
+        anim.startPos = new Vector3(startPos.x * 0.8f, 7, startPos.y * 0.8f);
+        anim.endPos = new Vector3(endPos.x * 0.8f, .01f, endPos.y * 0.8f);
+        anim.endPosInt = endPos;
     }
 }
