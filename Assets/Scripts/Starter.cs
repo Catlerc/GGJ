@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Starter : MonoBehaviour
 {
@@ -76,7 +77,7 @@ public class Starter : MonoBehaviour
         canvasStatsObj.SetActive(false);
 
         nickname = inputNickname.text;
-
+        Random.InitState(inputNickname.text.GetHashCode());
         if (nickname == "")
         {
             nickname = "No Name";

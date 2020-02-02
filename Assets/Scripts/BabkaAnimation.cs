@@ -11,7 +11,8 @@ public class BabkaAnimation : MonoBehaviour
     private Vector3 endPos;
     public bool work = false;
     public GameObject warn;
-    public bool spw=true;
+    public bool spw = true;
+
     public void Start()
     {
         startPos = transform.position;
@@ -26,20 +27,21 @@ public class BabkaAnimation : MonoBehaviour
             if (spw)
             {
                 spw = false;
-                Instantiate(warn,transform.position+Vector3.up*3,Quaternion.identity);
+                Instantiate(warn, transform.position + Vector3.up * 3, Quaternion.identity);
             }
-            
-            if (time>1)
+
+            if (time > 1)
             {
-            var v = Vector3.Lerp(startPos, endPos, time-1);
-            v.y = endPos.y + Mathf.Sin(time * Mathf.PI*10)/2;
-            transform.position = v;
-            
-            if (time > 2)
-            {
-                GetComponentInParent<Car>().engine = true;
-                Destroy(this);
-            }}
+                var v = Vector3.Lerp(startPos, endPos, time - 1);
+                v.y = endPos.y + Mathf.Sin(time * Mathf.PI * 10) / 2;
+                transform.position = v;
+
+                if (time > 2)
+                {
+                    GetComponentInParent<Car>().engine = true;
+                    Destroy(this);
+                }
+            }
         }
     }
 }

@@ -39,7 +39,8 @@ public class Car : MonoBehaviour
     public GameObject HPImage2;
     public GameObject HPImage3;
     public Text text;
-
+    public AudioSource music;
+    
     public int hp
     {
         set
@@ -57,6 +58,7 @@ public class Car : MonoBehaviour
                         Destroy(HPImage2);
                         break;
                     case 0:
+                        Destroy(HPImage1);
                         starter.EndGame();
                         break;
                 }
@@ -86,6 +88,7 @@ public class Car : MonoBehaviour
             if (time > maxTime) starter.EndGame();
         }
 
+        music.pitch = 1 + time / maxTime / 2 ;
   
 
         repairPoint.map(obj => repair(obj.transform.position));
