@@ -16,6 +16,8 @@ public class Car : MonoBehaviour
     public bool engine;
     private int _score = 0;
     public GameObject smogPrefab;
+    public GameObject smog;
+    public bool ssfds = true;
     
     public int score
     {
@@ -23,6 +25,7 @@ public class Car : MonoBehaviour
         {
             _score = value;
             text.text = $"Очки: {value}";
+            
         }
         get => _score;
     }
@@ -59,7 +62,7 @@ public class Car : MonoBehaviour
                         break;
                     case 0:
                         Destroy(HPImage1);
-                        starter.EndGame();
+                        starter.GameOver();
                         break;
                 }
 
@@ -80,6 +83,11 @@ public class Car : MonoBehaviour
     {
         if (engine)
         {
+            if (ssfds)
+            {
+                ssfds = false;
+                smog.SetActive(true);
+            }
             Move();
             CheckRoad();
             MoveCamera();

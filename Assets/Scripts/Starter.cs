@@ -21,6 +21,8 @@ public class Starter : MonoBehaviour
     public BabkaAnimation babk;
     public GameObject hpstat;
     public GameObject sveto;
+    public GameObject gameover;
+    
     void Start()
     {
         cameraWorkPos = cameraObj.transform.position;
@@ -92,6 +94,11 @@ public class Starter : MonoBehaviour
         sveto.SetActive(true);
     }
 
+    public void GameOver()
+    {
+        gameover.SetActive(true);
+        carInstance.engine = false;
+    }
     public void EndGame()
     {
         carInstance.engine = false;
