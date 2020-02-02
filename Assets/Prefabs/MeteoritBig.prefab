@@ -60,14 +60,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f327f361bc1b9ee48afdae9e9cebd70f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carInstance: {fileID: 0}
   holePrefab: {fileID: 5672125278032291158, guid: 77f4f4c439da1234597f3b0ffd3d3067,
+    type: 3}
+  smogPrefab: {fileID: 3862330100635130989, guid: 3d96a596127ed9244bcfa879b4fb27b6,
     type: 3}
   startPos: {x: 0, y: 0, z: 0}
   endPos: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0}
   endPosInt: {x: 0, y: 0}
   time: 0
+  maxRotateSpeed: 10
 --- !u!1 &5834512036456142184
 GameObject:
   m_ObjectHideFlags: 0

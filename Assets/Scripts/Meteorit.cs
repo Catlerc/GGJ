@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class Meteorit : MonoBehaviour
 {
     public GameObject holePrefab;
+    public GameObject smogPrefab;
     public Vector3 startPos;
     public Vector3 endPos;
     public Vector3 rotation;
@@ -47,14 +48,16 @@ public class Meteorit : MonoBehaviour
 
             if (okay)
             {
-                var entity = Instantiate(holePrefab, endPos, Quaternion.identity).GetComponent<Entity>();
+                var entity = Instantiate(holePrefab, new Vector3(endPosInt.x * 0.8f, .01f, endPosInt.y * 0.8f), Quaternion.identity).GetComponent<Entity>();
                 for (var x = 0; x < 4; x++)
                 for (var y = 0; y < 4; y++)
                 {
-                    Map.RemoveStatic(endPosInt + Vector2Int.up * x + Vector2Int.right * y);
+                    Map.Remove(endPosInt + Vector2Int.up * x + Vector2Int.right * y);
                     Map.Set(endPosInt + Vector2Int.up * x + Vector2Int.right * y, entity);
                 }
             }
+            
+            Destroy(Instantiate(smogPrefab, endPos, Quaternion.identity), 10);
 
             Destroy(gameObject);
         }
