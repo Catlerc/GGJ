@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Starter : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class Starter : MonoBehaviour
     public BabkaAnimation babk;
     public GameObject hpstat;
     public GameObject sveto;
+    public GameObject gameover;
+    
     void Start()
     {
         cameraWorkPos = cameraObj.transform.position;
@@ -76,7 +79,7 @@ public class Starter : MonoBehaviour
         canvasStatsObj.SetActive(false);
 
         nickname = inputNickname.text;
-
+        Random.InitState(inputNickname.text.GetHashCode());
         if (nickname == "")
         {
             nickname = "No Name";
@@ -91,6 +94,11 @@ public class Starter : MonoBehaviour
         sveto.SetActive(true);
     }
 
+    public void GameOver()
+    {
+        gameover.SetActive(true);
+        carInstance.engine = false;
+    }
     public void EndGame()
     {
         carInstance.engine = false;

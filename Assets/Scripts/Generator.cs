@@ -70,7 +70,7 @@ public class Generator : MonoBehaviour
         if (Random.Range(0, 100) < lineIndex / 4f)
             SpawnScrap(new Vector2Int(-30, lineIndex + 10), new Vector2Int(Random.Range(-20, 20), lineIndex));
 
-        if (Random.Range(0, 300) < lineIndex / 4f)
+        if (Random.Range(0, 300) < lineIndex / 50f)
             SpawnEntityRunner(new Vector2Int(Random.Range(0, 2) * 40 - 20, lineIndex), new Vector2Int(-30, lineIndex + 10));
 
         if (Random.Range(0, 300) < lineIndex / 4f)
