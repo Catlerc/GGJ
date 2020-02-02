@@ -10,6 +10,7 @@ public class Generator : MonoBehaviour
     public GameObject[] grassPrefabs;
     public GameObject bord;
     public GameObject[] scrap;
+    public GameObject[] runners;
     public GameObject[] big;
     private readonly int width = 32;
     public int lineIndex = 0;
@@ -68,6 +69,8 @@ public class Generator : MonoBehaviour
         if (Random.Range(0, 100) < lineIndex / 4f)
             SpawnScrap(new Vector2Int(-30, lineIndex + 10), new Vector2Int(Random.Range(-20, 20), lineIndex));
 
+        if (Random.Range(0, 300) < lineIndex / 4f)
+            SpawnEntityRunner(new Vector2Int(Random.Range(0, 2) * 40 - 20, lineIndex), new Vector2Int(-30, lineIndex + 10));
 
         lineIndex++;
     }
@@ -101,5 +104,11 @@ public class Generator : MonoBehaviour
         var anim = entity.gameObject.GetComponent<ScrapFallAnimation>();
         anim.startPos = new Vector3(startPos.x * 0.8f, 0, startPos.y * 0.8f);
         anim.endPos = new Vector3(endPos.x * 0.8f, .01f, endPos.y * 0.8f);
+    }
+    
+    public void SpawnEntityRunner(Vector2Int startPos, Vector2Int endPos)
+    {
+        var entity = runners.PickRandom().InstantiateToMap(startPos).gameObject;
+        entity.transform.Rotate(0, startPos.x > 14 ? 270 : 90, 0);
     }
 }
