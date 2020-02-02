@@ -108,7 +108,7 @@ public class Car : MonoBehaviour
         Destroy(Instantiate(smogPrefab,pos,Quaternion.identity),5);
         bool spawned = false;
         transform.rotation = Quaternion.identity;
-        var g = Mathf.FloorToInt(cameraObj.transform.position.z / 0.8f)+7;
+        var g = Mathf.FloorToInt(cameraObj.transform.position.z / 0.8f)+4;
         for (var i = 0; i < 13 - 4; i++)
         {
             bool canSpawn = true;
@@ -122,7 +122,7 @@ public class Car : MonoBehaviour
 
             if (canSpawn)
             {
-                transform.position = new Vector3((i+1) * 0.8f, pos.y, cameraObj.transform.position.z-3);
+                transform.position = new Vector3((i+1) * 0.8f, pos.y, cameraObj.transform.position.z-1);
                 spawned = true;
                 break;
             }
@@ -181,7 +181,7 @@ public class Car : MonoBehaviour
             pos.z = transform.position.z + cameraMaxOffset;
         else
             pos.z += Time.deltaTime * 3;
-        for (float i = gen.lineIndex * 0.8f; i <= Mathf.FloorToInt(transform.position.z) + 16; i++)
+        for (float i = gen.lineIndex * 0.8f; i <= Mathf.FloorToInt(transform.position.z) + 29; i++)
         {
             gen.InstantiateLine();
             gen.delLine();

@@ -5,7 +5,9 @@ using UnityEngine;
 public class EntityRunner : MonoBehaviour
 {
     public float speed = 2;
-    
+
+    public float time = 0;
+
     void Start()
     {
         speed *= 1 + (Random.Range(0, 70) * 1f / 100f);
@@ -14,6 +16,7 @@ public class EntityRunner : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(0, 0, Time.deltaTime * speed);
+        time += Time.deltaTime;
+        transform.Translate(0, Mathf.Sin(time * Mathf.PI * 5)/20, Time.deltaTime * speed);
     }
 }

@@ -12,8 +12,8 @@ public static class Utils
         var entity = Object.Instantiate(prefab,
                 new Vector3(pos.x * Generator.SizeOfTileSide, 0, pos.y * Generator.SizeOfTileSide), Quaternion.identity)
             .GetComponent<Entity>();
-        if (entity == null) Debug.LogWarning("Spawn non Entity!");
-        else
+        if (entity != null) //Debug.LogWarning("Spawn non Entity!");
+
             Map.Set(pos, entity);
         return entity;
     }
@@ -24,8 +24,8 @@ public static class Utils
                 new Vector3(pos.x * Generator.SizeOfTileSide, 0, pos.y * Generator.SizeOfTileSide), Quaternion.identity)
             .GetComponent<Entity>();
         entity.transform.rotation = Quaternion.Euler(0, rotation, 0);
-        if (entity == null) Debug.LogWarning("Spawn non Entity!");
-        else
+        if (entity != null) //Debug.LogWarning("Spawn non Entity!");
+
             Map.Set(pos, entity);
         return entity;
     }
@@ -68,10 +68,10 @@ public static class Utils
     {
         var maxNoiseValue = 0f;
         var maxObj = array[0];
-        for (var i=0;i<array.Length;i++)
+        for (var i = 0; i < array.Length; i++)
         {
             var scale = 15f - i * 3;
-            var value = Mathf.PerlinNoise(pos.x / scale + 100+i, pos.y / scale + 100);
+            var value = Mathf.PerlinNoise(pos.x / scale + 100 + i, pos.y / scale + 100);
             if (value > maxNoiseValue)
             {
                 maxNoiseValue = value;

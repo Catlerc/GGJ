@@ -67,14 +67,16 @@ public class Generator : MonoBehaviour
                 }, x == 0 ? 1 : 2);
         }
 
-        if (Random.Range(0, 100) < lineIndex / 4f)
+        if (Random.Range(0, 100) < lineIndex / 10f)
             SpawnScrap(new Vector2Int(-30, lineIndex + 10), new Vector2Int(Random.Range(-20, 20), lineIndex));
 
         if (Random.Range(0, 300) < lineIndex / 50f)
-            SpawnEntityRunner(new Vector2Int(Random.Range(0, 2) * 40 - 20, lineIndex), new Vector2Int(-30, lineIndex + 10));
+            SpawnEntityRunner(new Vector2Int(Random.Range(0, 2) * 40 - 20, lineIndex),
+                new Vector2Int(-30, lineIndex + 10));
 
-        if (Random.Range(0, 300) < lineIndex / 4f)
-            SpawnEntityMeteorit(new Vector2Int(Random.Range(0, 2) * 40 - 20, lineIndex - 25), new Vector2Int(Random.Range(-15, 15), lineIndex));
+        if (Random.Range(0, 300) < lineIndex / 100f)
+            SpawnEntityMeteorit(new Vector2Int(Random.Range(0, 2) * 40 - 20, lineIndex - 25),
+                new Vector2Int(Random.Range(-15, 15), lineIndex));
 
         lineIndex++;
     }
@@ -98,7 +100,7 @@ public class Generator : MonoBehaviour
     public void Start()
     {
         lineIndex = 0;
-        delLineIndex = -35;
+        delLineIndex = -55;
     }
 
     public void SpawnScrap(Vector2Int startPos, Vector2Int endPos)
@@ -108,15 +110,19 @@ public class Generator : MonoBehaviour
         anim.startPos = new Vector3(startPos.x * 0.8f, 0, startPos.y * 0.8f);
         anim.endPos = new Vector3(endPos.x * 0.8f, .01f, endPos.y * 0.8f);
     }
-    
+
     public void SpawnEntityRunner(Vector2Int startPos, Vector2Int endPos)
     {
         var entity = runners.PickRandom().InstantiateToMap(startPos).gameObject;
         entity.transform.Rotate(0, startPos.x > 14 ? 270 : 90, 0);
     }
-    
+
     public void SpawnEntityMeteorit(Vector2Int startPos, Vector2Int endPos)
     {
+        for (var x = 0; x < 4; x++)
+        for (var y = 0; y < 4; y++)
+            if (Map.Get(endPos).CompareTag("dead"))
+                return;
         var entity = meteorits.PickRandom().InstantiateToMap(startPos).gameObject;
         var anim = entity.GetComponent<Meteorit>();
         anim.startPos = new Vector3(startPos.x * 0.8f, 7, startPos.y * 0.8f);

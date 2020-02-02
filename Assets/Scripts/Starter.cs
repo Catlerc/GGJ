@@ -22,6 +22,8 @@ public class Starter : MonoBehaviour
     public GameObject hpstat;
     public GameObject sveto;
     public GameObject gameover;
+    public res res;
+    
     
     void Start()
     {
@@ -75,6 +77,7 @@ public class Starter : MonoBehaviour
 
     public void StartGame()
     {
+        res.canRestart = true;
         canvasStartObj.SetActive(false);
         canvasStatsObj.SetActive(false);
 
@@ -89,6 +92,9 @@ public class Starter : MonoBehaviour
         babk.work = true;
       
         carInstance.MoveCamera();
+        carInstance.MoveCamera();
+        carInstance.MoveCamera();
+        carInstance.MoveCamera();
         Camera.main.transform.position-=Vector3.back*5;
         hpstat.SetActive(true);
         sveto.SetActive(true);
@@ -102,6 +108,7 @@ public class Starter : MonoBehaviour
     public void EndGame()
     {
         carInstance.engine = false;
+        hpstat.SetActive(false);
         AddRating();
     }
 

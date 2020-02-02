@@ -13,10 +13,11 @@ public class Meteorit : MonoBehaviour
     public Vector2Int endPosInt;
     public float time;
     public float maxRotateSpeed = 10;
-    
+
     void Start()
     {
-        rotation = new Vector3(Random.Range(0, maxRotateSpeed), Random.Range(0, maxRotateSpeed), Random.Range(0, maxRotateSpeed));   
+        rotation = new Vector3(Random.Range(0, maxRotateSpeed), Random.Range(0, maxRotateSpeed),
+            Random.Range(0, maxRotateSpeed));
     }
 
     void Update()
@@ -27,15 +28,19 @@ public class Meteorit : MonoBehaviour
         if (time >= 1)
         {
             bool okay = true;
-            for (var x = 0; x < 4; x++)
-            for (var y = 0; y < 4; y++)
+            for (var x = -1; x <= 4; x++)
+            for (var y = -1; y <= 4; y++)
             {
                 var pos = endPosInt + Vector2Int.up * x + Vector2Int.right * y;
                 if (Map.Test(pos))
                 {
-                    if (Map.Get(pos).name.Contains("BigHole"))
+                    var ss = Map.Get(pos);
+                    if (ss != null)
                     {
-                        okay = false;
+                        if (ss.name.Contains("BigHole"))
+                        {
+                            okay = false;
+                        }
                     }
                 }
             }
